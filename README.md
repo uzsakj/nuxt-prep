@@ -24,14 +24,17 @@ app/
 │  └─ dashboard.vue
 ├─ components/    # Reusable UI components
 ├─ stores/        # Pinia stores
+│  └─ auth.ts
 │  └─ app.ts
 ├─ composables/   # Reusable logic hooks
-├─ server/
-│  └─ api/        # Mock API endpoints using Nuxt Nitro
 ├─ middleware/    # Route guards or other logic
+│  └─ auth.global.ts
 ├─ nuxt.config.ts # Nuxt configuration
 ├─ package.json
-└─ README.md
+├─ README.md
+├─ server/
+│  └─ api/        # Mock API endpoints using Nuxt Nitro
+│  └─ middleware/ # Server-side route guards or other logic
 ```
 
 
