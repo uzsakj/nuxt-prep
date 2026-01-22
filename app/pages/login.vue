@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Button from '../composables/Button.vue'
+
 
     const auth= useAuthStore()
     const username = ref('')
@@ -7,13 +9,6 @@
     const error = ref<string|null>(null)
 
 
-    onMounted(() => {
-        // Update fields with autofilled values so they are not lost on rerenders
-        const u = document.getElementById('username') as HTMLInputElement
-        const p = document.getElementById('password') as HTMLInputElement
-        if (u?.value) username.value = u.value
-        if (p?.value) password.value = p.value
-    })
 
     const onSubmit = async ()=>{
         error.value = null
@@ -39,7 +34,7 @@
                 <label for="username">Username</label>
                 <input
                 id="username"
-                v-model="username"
+                v-model.lazy="username"
                 type="text"
                 autocomplete="username"
                 required>
@@ -55,9 +50,9 @@
                 required>
             </div>
 
-            <button type="submit" :disabled="loading">
+           <Button class="login-btn" full :loading="loading" type="submit">
                 {{ loading ? 'Logging in...' : 'Login' }}
-            </button>
+           </Button>
             <p v-if="error" class="error">
                 {{ error }}
             </p>
@@ -66,7 +61,7 @@
 </template>
 <style>
     .login-page{
-        max-width: 420px;
+        max-width: 25vw;
         margin:4rem auto;
         padding: 2rem;
         border: 1px solid gray;
@@ -86,15 +81,15 @@
         display: block;
         margin-bottom: 0.25rem;
     }
-
+    
     input{
         width: 100%;
         padding: 0.5rem;
         margin-top: 1rem;
+        box-sizing: border-box;
     }
 
-    button{
-        width: 100%;
+    .login-btn{
         padding: 0.5rem;
         margin-top: 1rem;
     }
