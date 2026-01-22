@@ -1,25 +1,13 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/stores/auth'
 import { useDashboardStore } from '~/stores/dashboard'
-import Button from '../composables/Button.vue'
-import Card from '../composables/Card.vue'
+import Button from '../components/Button.vue'
+import Card from '../components/Card.vue'
 
 const auth = useAuthStore()
 const dashboard = useDashboardStore()
 
 const activities = computed(() => dashboard.activities)
-
-const handleToggle = (id: number, event: Event) => {
-  event.preventDefault()
-  event.stopPropagation()
-  dashboard.toggleCompleted(id)
-}
-
-const handleDelete = (id: number, event: Event) => {
-  event.preventDefault()
-  event.stopPropagation()
-  dashboard.deleteActivity(id)
-}
 
 onMounted(() => {
   dashboard.fetchActivities()
@@ -50,12 +38,12 @@ onMounted(() => {
         footer-gap="md"
       >
         <template #footer>
-          <Button type="button" @click="handleToggle(item.id, $event)">
+          <Button type="button" @click="dashboard.toggleCompleted(item.id)">
             <template #default>
             {{ item.completed ? 'Mark Undone' : 'Mark Done' }}
           </template>
           </Button>
-          <Button type="button" @click="handleDelete(item.id, $event)">
+          <Button type="button" @click="dashboard.deleteActivity(item.id)">
             {{ 'Delete'}}
           </Button>
         </template>

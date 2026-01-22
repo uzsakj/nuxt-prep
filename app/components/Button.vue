@@ -1,7 +1,7 @@
 <template>
   <button 
   :disabled="loading"
-  @click="$emit('click', $event)"
+  @click="handleClick"
   class="btn"
   :class="[{ full }, $attrs.class]">
     <span v-if="loading">{{ loadingMessage || 'loading' }}</span>
@@ -10,12 +10,25 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   loading?: boolean
   type?: 'button' | 'submit'
    full?: boolean 
   loadingMessage?: string
 }>()
+
+const emit = defineEmits<{
+  click: [event: Event]
+}>()
+
+const handleClick = (event: Event) => {
+  // Only prevent default for non-submit buttons
+  if (props.type !== 'submit') {
+    event.preventDefault()
+  }
+  event.stopPropagation()
+  emit('click', event)
+}
 </script>
 
 <style scoped>

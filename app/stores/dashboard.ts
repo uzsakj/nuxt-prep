@@ -36,14 +36,14 @@ export const useDashboardStore = defineStore('dashboard', () => {
     }
 
     let togglingId: number | null = null
-    
+
     const toggleCompleted = (id: number) => {
         if (togglingId === id) return
         togglingId = id
-        
+
         const item = activities.find(a => a.id === id)
         if (item) item.completed = !item.completed
-        
+
         nextTick(() => {
             togglingId = null
         })

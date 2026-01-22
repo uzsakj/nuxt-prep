@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import Button from '../composables/Button.vue'
+import Button from '../components/Button.vue'
+
 
 
     const auth= useAuthStore()
