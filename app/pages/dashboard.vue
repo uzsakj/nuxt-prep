@@ -31,7 +31,7 @@ onMounted(() => {
 
       <Card
         v-for="item in activities"
-        :key="`${item.id}-${item.completed}`"
+        :key="item.id"
         :title="item.title"
         :content="item.content"
         :class="{ completed: item.completed }"
