@@ -56,6 +56,21 @@ export const useDashboardStore = defineStore('dashboard', () => {
         }
     }
 
+    const addActivity = (content: string) => {
+        if (!content.trim()) return
+
+        const maxId = activities.length > 0
+            ? Math.max(...activities.map(a => a.id))
+            : 0
+
+        activities.push({
+            id: maxId + 1,
+            title: `Task ${activities.length + 1}`,
+            content: content,
+            completed: false
+        })
+    }
+
     return {
         activities,
         loading,
@@ -63,6 +78,7 @@ export const useDashboardStore = defineStore('dashboard', () => {
         completedCount,
         totalCount,
         fetchActivities,
+        addActivity,
         toggleCompleted,
         deleteActivity
     }

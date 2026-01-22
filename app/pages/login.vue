@@ -60,7 +60,7 @@ import Button from '../components/Button.vue'
         </form>
     </div>
 </template>
-<style>
+<style scoped>
     .login-page{
         max-width: 25vw;
         margin:4rem auto;
