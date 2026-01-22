@@ -5,11 +5,20 @@ import Button from '../components/Button.vue'
 import Card from '../components/Card.vue'
 
 const newTaskContent = ref('')
+const filter = ref<'all' | 'done' | 'undone'>('all')
 
 const auth = useAuthStore()
 const dashboard = useDashboardStore()
 
-const activities = computed(() => dashboard.activities)
+const activities = computed(() => {
+  if (filter.value === 'all') {
+    return dashboard.activities
+  } else if (filter.value === 'done') {
+    return dashboard.activities.filter(a => a.completed)
+  } else {
+    return dashboard.activities.filter(a => !a.completed)
+  }
+})
 
 const handleAddTask = () => {
   if (newTaskContent.value.trim()) {
@@ -35,9 +44,34 @@ onMounted(() => {
     <section>
       <h2>Activity Feed</h2>
 
-      <div class="stats">
-      <p>Total tasks: {{ dashboard.totalCount }}</p>
-      <p>Completed: {{ dashboard.completedCount }}</p>
+      <div class="stats-filter">
+        <div class="stats">
+          <p>Total tasks: {{ dashboard.totalCount }}</p>
+          <p>Completed: {{ dashboard.completedCount }}</p>
+        </div>
+        <div class="filters">
+          <Button 
+            type="button" 
+            :class="{ active: filter === 'all' }"
+            @click="filter = 'all'"
+          >
+            All
+          </Button>
+          <Button 
+            type="button" 
+            :class="{ active: filter === 'done' }"
+            @click="filter = 'done'"
+          >
+            Done
+          </Button>
+          <Button 
+            type="button" 
+            :class="{ active: filter === 'undone' }"
+            @click="filter = 'undone'"
+          >
+            Undone
+          </Button>
+        </div>
       </div>
 
       <p v-if="dashboard.loading">Loading...</p>
@@ -73,10 +107,26 @@ onMounted(() => {
       padding: 2rem;
       border-radius: 12px;
     }
+    .stats-filter{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        gap: 20px;
+    }
+    
     .stats{
         display: flex;
         gap: 20px;
-        margin-bottom: 1rem;
+    }
+    
+    .filters{
+        display: flex;
+        gap: 10px;
+    }
+    
+    .filters .btn.active{
+        background-color: #1e40af;
     }
     .task-input{
       display: flex;
