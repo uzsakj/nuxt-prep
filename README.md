@@ -1,75 +1,52 @@
-# Nuxt Minimal Starter
+# Nuxt 4 + Vue 3 + Pinia Practice Project
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Overview
+This is a minimal Nuxt 4 application built with Vue 3 and Pinia, intended for **practice and refamiliarization** with the framework and state management concepts.  
 
-## Setup
+The focus is on **clean architecture, state management, and SSR-aware patterns**, rather than full feature implementation.
 
-Make sure to install dependencies:
+---
 
-```bash
-# npm
-npm install
+## Tech Stack
+- [Nuxt 4](https://nuxt.com) (Vue 3 + SSR-ready framework)
+- [Vue 3](https://vuejs.org)
+- [Pinia](https://pinia.vuejs.org) (state management)
+- TypeScript (optional, recommended)
+- Node 18+ / npm 9+
 
-# pnpm
-pnpm install
+---
+## Project Structure
 
-# yarn
-yarn install
-
-# bun
-bun install
+```text
+app/
+├─ pages/         # Page-level components (auto-generated routes)
+│  ├─ login.vue
+│  └─ dashboard.vue
+├─ components/    # Reusable UI components
+├─ stores/        # Pinia stores
+│  └─ app.ts
+├─ composables/   # Reusable logic hooks
+├─ server/
+│  └─ api/        # Mock API endpoints using Nuxt Nitro
+├─ middleware/    # Route guards or other logic
+├─ nuxt.config.ts # Nuxt configuration
+├─ package.json
+└─ README.md
 ```
 
-## Development Server
 
-Start the development server on `http://localhost:3000`:
+> This structure emphasizes **separation of concerns**:
+> - Global shared state → Pinia  
+> - Reusable logic → Composables  
+> - SSR-aware API → Nitro endpoints  
+> - Local UI state → Component-level refs
 
-```bash
-# npm
-npm run dev
+## Planned Features for Practice
 
-# pnpm
-pnpm dev
+The project is designed to practice **Nuxt 4 + Vue 3 + Pinia patterns** in a structured way. Planned features include:
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- **Authentication flow** with route middleware  
+- **Users / dashboard page** using mock API  
+- **Async data fetching** with Pinia + `useAsyncData`  
+- **Derived state** using getters and computed properties  
+- **Minimal UI** with reusable components
